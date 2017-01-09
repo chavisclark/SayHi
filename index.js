@@ -30,12 +30,12 @@
     },
 
     validate: function() {
-      
+
     }
   };
 
   SayHi.init = function(firstName, lastName, language) {
-      //Build properties for new insatnces of SayHi
+    //Build properties for new insatnces of SayHi
     var self = this;
     self.firstName = firstName || '';
     self.lastName = lastName || '';
