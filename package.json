@@ -1,0 +1,17 @@
+{
+  "name": "sayhi",
+  "version": "0.0.1",
+  "description": "Simple greeting library with language support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chavisclark/SayHi.git"
+  },
+  "author": "Chavis Clark",
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
