@@ -45,7 +45,23 @@
       }
     },
 
-    greeting: function() {
+    selectGreeting: function(formal) {
+      var message;
+
+      //set message variable to the result of the formal greeting method
+      if (formal) {
+          message = this.formalGreeting(); 
+      }
+
+      //set message variable to the result of the informal greeting method
+      if (!formal) {
+          message = this.informalGreeting(); 
+      }
+      //return the resulting greeting message
+      return message;
+    },
+
+    informalGreeting: function() {
       //returns informal greeting in desired language
       return greetings[this.language] + ' ' + this.firstName + '!';
     },
@@ -58,18 +74,13 @@
     greet: function(formal) {
       //handles which greeting function to call
       var message;
-
-      if (formal) {
-          message = this.formalGreeting(); 
-      }
-
-      if (!formal) {
-          message = this.greeting(); 
-      }
-
+      
+      //selects greeting type
+      this.selectGreeting(formal, message);
+      
       //logs the intended greeting
       if (console) {
-        console.log(message);
+        console.log(this.selectGreeting(formal, message));
       }
 
       //returning `this` makes the method chainable 
@@ -108,7 +119,9 @@
       }
 
       //select html node to display greeting
-      $(selector).html(this.greet(formal))
+      var msg = this.selectGreeting(formal);
+      console.log(msg)
+      $(selector).html(msg)
 
       //returning `this` makes the method chainable
       return this;
