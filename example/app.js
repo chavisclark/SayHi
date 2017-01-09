@@ -1,2 +1,2 @@
-var hi = Hi$('John', 'Does');
-console.log(hi)
+var hi = Hi$('Phil', 'Dunphy');
+hi.greet().setLang('es').greet();

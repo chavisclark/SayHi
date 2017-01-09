@@ -25,12 +25,66 @@
   };
 
   SayHi.prototype = {
+    //Sets the prototype methods 
     fullName: function() {
+      //returns first and last name
       return this.firstName + ' ' + this.lastName;
     },
 
     validate: function() {
+      //checks if program supports given language input
+      if (supportedLangs.indexOf(this.language) === -1) {
+        throw "Invalid language";
+      }
+    },
 
+    greeting: function() {
+      //returns informal greeting in desired language
+      return greetings[this.language] + ' ' + this.firstName + '!';
+    },
+
+    formalGreeting: function() {
+      //returns formal greeting in desired language
+      return formalGreetings[this.language] + ' ' + this.fullName() + '!';
+    },
+
+    greet: function(formal) {
+      //handles which greeting function to call
+      var message;
+
+      if (formal) {
+          message = this.formalGreeting(); 
+      }
+
+      if (!formal) {
+          message = this.greeting(); 
+      }
+
+      //logs the intended greeting
+      if (console) {
+        console.log(message);
+      }
+
+      //returning `this` makes the method chainable 
+      return this;
+    },
+
+    log: function() {
+      //log greeting activity
+      if (console) {
+        console.log(logMessages[this.language] + ': ' + this.fullName());
+      }
+
+      return this;
+    },
+
+    setLang: function(lang) {
+      //sets which language to support
+      this.language = lang;
+
+      this.validate();
+
+      return this;
     }
   };
 
