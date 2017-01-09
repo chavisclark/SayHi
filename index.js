@@ -1,28 +1,35 @@
 //Safely create self-contained execution context
-(function(global, $) {
+;(function(global, $) {
   var SayHi = function(firstName, lastName, language) {
-    //Return a function constructor for cleaner code base
+    //Returns a function constructor
     return new SayHi.init(firstName, lastName, language);
   }
 
+  // The following variables are only exposed to this enclosed object
+  //---START--//
+
+  //language support values as array
   var supportedLangs = ['en', 'es'];
 
-  //Set messages for English and Spanish
-  //These are only exposed to this enclosed object
+  //Informal greetings for English and Spanish
   var greetings = {
     en: 'Hello',
     es: 'Hola'
   };
 
+  //Formal greetings for English and Spanish
   var formalGreetings = {
     en: 'Greetings',
     es: 'Saludos'
   };
 
+  //Logged messages for English and Spanish
   var logMessages = {
     en: 'Logged in',
     es: 'Inició sesión'
   };
+
+  //---END---//
 
   SayHi.prototype = {
     //Sets the prototype methods 
@@ -75,6 +82,7 @@
         console.log(logMessages[this.language] + ': ' + this.fullName());
       }
 
+      //returning `this` makes the method chainable
       return this;
     },
 
@@ -84,16 +92,39 @@
 
       this.validate();
 
+      //returning `this` makes the method chainable
+      return this;
+    },
+
+    HTMLspeak: function(selector, formal) {
+      //Handle jquery support
+      if(!$) {
+        throw 'jQuery not loaded';
+      }
+
+      //Handle node selection requirement
+      if(!selector) {
+        throw 'Missing targeted DOM node'
+      }
+
+      //select html node to display greeting
+      $(selector).html(this.greet(formal))
+
+      //returning `this` makes the method chainable
       return this;
     }
   };
 
+  //the actual object is created here, allowing use of the `new` object
+  //created in the initial SayHi function
   SayHi.init = function(firstName, lastName, language) {
     //Build properties for new insatnces of SayHi
     var self = this;
     self.firstName = firstName || '';
     self.lastName = lastName || '';
     self.language = language || 'en';
+
+    self.validate();
   }
 
   //Attach init's prototype to the SayHi prototype

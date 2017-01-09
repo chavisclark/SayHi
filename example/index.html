@@ -4,9 +4,16 @@
     <title>Say Hi!</title>
   </head>
   <body>
-    <div id="app"></div>
-  </body>
+    <div id="login_container">
+      <select id="lang">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+      </select>
+      <input type="button" value="Login" id="login" />
+    </div>
+    <h1 id="greeting"></h1>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../index.js"></script>
     <script src="./app.js"></script>
+  </body>
 </html>
